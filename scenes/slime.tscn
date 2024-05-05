@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://beeb0d01ugra8"]
+[gd_scene load_steps=12 format=3 uid="uid://beeb0d01ugra8"]
 
 [ext_resource type="PackedScene" uid="uid://bkaggbaen7a8w" path="res://scenes/killzone.tscn" id="1_5jrie"]
 [ext_resource type="Script" path="res://scripts/slime.gd" id="1_a7glo"]
 [ext_resource type="Texture2D" uid="uid://bvhj8202skjs7" path="res://assets/sprites/slime_purple.png" id="2_h2muy"]
+[ext_resource type="AudioStream" uid="uid://cvnk2b8mybe4l" path="res://assets/sounds/stef_enemy.wav" id="4_jm1cv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82d1b"]
 size = Vector2(12, 15)
@@ -80,3 +81,7 @@ target_position = Vector2(9, 0)
 [node name="RayCastLeft" type="RayCast2D" parent="."]
 position = Vector2(0, 5)
 target_position = Vector2(-9, 0)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_jm1cv")
+autoplay = true
