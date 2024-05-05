@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=3 uid="uid://beeb0d01ugra8"]
+
+[ext_resource type="PackedScene" uid="uid://bkaggbaen7a8w" path="res://scenes/killzone.tscn" id="1_5jrie"]
+[ext_resource type="Script" path="res://scripts/slime.gd" id="1_a7glo"]
+[ext_resource type="Texture2D" uid="uid://bvhj8202skjs7" path="res://assets/sprites/slime_purple.png" id="2_h2muy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_82d1b"]
+size = Vector2(12, 15)
+
+[sub_resource type="GDScript" id="GDScript_d1cy2"]
+script/source = "extends CollisionShape2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b264f"]
+atlas = ExtResource("2_h2muy")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ss5dx"]
+atlas = ExtResource("2_h2muy")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iphl3"]
+atlas = ExtResource("2_h2muy")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5fjnl"]
+atlas = ExtResource("2_h2muy")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ep1lr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b264f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ss5dx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iphl3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5fjnl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Slime" type="Node2D"]
+script = ExtResource("1_a7glo")
+
+[node name="Killzone" parent="." instance=ExtResource("1_5jrie")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(0, 4.5)
+shape = SubResource("RectangleShape2D_82d1b")
+script = SubResource("GDScript_d1cy2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ep1lr")
+autoplay = "default"
+frame = 2
+frame_progress = 0.110332
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(0, 5)
+target_position = Vector2(9, 0)
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(0, 5)
+target_position = Vector2(-9, 0)
