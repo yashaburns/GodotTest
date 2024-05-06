@@ -2,12 +2,19 @@ extends CharacterBody2D
 
 
 @export var maxSpeed = 125.0
+@export var maxSpeedWhileDashing = 300
 @export var jumpVelocity = -300.0
 @export var acceleration : int = 20
 @export var decceleration : float = 0.2
 @export var jumpBufferTime : int = 5
 @export var coyoteTime : int = 5
+@export var dashPower : int = 300
+@export var dashDuration : int = 15
+@export var dashCooldown : int = 60
 
+var dashing : bool = false
+var dashDurTimer : int = 0
+var dashTimer : int = 0
 var jumpBufferCounter : int = 0
 var coyoteCounter : int = 0
 
@@ -32,6 +39,12 @@ func _physics_process(delta):
 	
 	if jumpBufferCounter > 0:
 		jumpBufferCounter -= 1
+	
+	if dashTimer > 0:
+		dashTimer -= 1
+	
+	if dashDurTimer > 0:
+		dashDurTimer -= 1
 	
 	if jumpBufferCounter > 0 and coyoteCounter > 0:
 		velocity.y = jumpVelocity
@@ -60,6 +73,15 @@ func _physics_process(delta):
 	else:
 		animated_sprite.play("jump")
 	
+	# Dash
+	if Input.is_action_just_pressed("dash") and dashTimer == 0:
+		dashing = true
+		dashTimer = dashCooldown
+		velocity.x = dashPower * direction
+		dashDurTimer = dashDuration
+	elif dashDurTimer == 0:
+		dashing = false
+	
 	# Movement
 	if direction == 1:
 		velocity.x += acceleration
@@ -68,7 +90,10 @@ func _physics_process(delta):
 	else:
 	#	velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.x = lerp(velocity.x,float(0),decceleration)
-	
-	velocity.x = clamp(velocity.x, -maxSpeed, maxSpeed)
+		
+	if dashing == false:
+		velocity.x = clamp(velocity.x, -maxSpeed, maxSpeed)
+	if dashing == true:
+		velocity.x = clamp(velocity.x, -maxSpeedWhileDashing, maxSpeedWhileDashing)
 
 	move_and_slide()

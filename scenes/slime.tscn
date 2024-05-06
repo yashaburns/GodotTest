@@ -54,7 +54,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_5fjnl")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
 "speed": 10.0
 }]
 
@@ -70,9 +70,8 @@ script = SubResource("GDScript_d1cy2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ep1lr")
-autoplay = "default"
-frame = 2
-frame_progress = 0.110332
+animation = &"idle"
+autoplay = "idle"
 
 [node name="RayCastRight" type="RayCast2D" parent="."]
 position = Vector2(0, 5)
