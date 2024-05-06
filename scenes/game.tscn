@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bhpsalsk4cpno"]
+[gd_scene load_steps=19 format=3 uid="uid://bhpsalsk4cpno"]
 
 [ext_resource type="PackedScene" uid="uid://cpqm2jhql721d" path="res://scenes/player.tscn" id="1_avx1f"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_u2t82"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://1jh3fy3ouwl8" path="res://scenes/platform.tscn" id="3_qntis"]
 [ext_resource type="PackedScene" uid="uid://c1kgbigxfhdw1" path="res://scenes/coin.tscn" id="4_hkujj"]
 [ext_resource type="PackedScene" uid="uid://bkaggbaen7a8w" path="res://scenes/killzone.tscn" id="5_gbgbr"]
+[ext_resource type="PackedScene" uid="uid://bayas5xrj2cfn" path="res://scenes/trail.tscn" id="5_vtti5"]
 [ext_resource type="PackedScene" uid="uid://beeb0d01ugra8" path="res://scenes/slime.tscn" id="6_q1rcm"]
 [ext_resource type="FontFile" uid="uid://btxw5rrfthptt" path="res://assets/fonts/PixelOperator8.ttf" id="7_kkogg"]
 
@@ -525,6 +526,10 @@ zoom = Vector2(4, 4)
 limit_bottom = 70
 limit_smoothed = true
 position_smoothing_enabled = true
+
+[node name="Trail" parent="Player" instance=ExtResource("5_vtti5")]
+visible = false
+position = Vector2(0, -6)
 
 [node name="Coins" type="Node" parent="."]
 

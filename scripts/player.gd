@@ -11,6 +11,7 @@ extends CharacterBody2D
 @export var dashPower : int = 300
 @export var dashDuration : int = 15
 @export var dashCooldown : int = 60
+@export var ghost_node : PackedScene
 
 var dashing : bool = false
 var dashDurTimer : int = 0
@@ -22,12 +23,17 @@ var coyoteCounter : int = 0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var trail = $Trail
+@onready var ghost_time = $ghostTime
 
 func _physics_process(delta):
 	# Add the gravity and start coyoteCounter
 	if not is_on_floor():
 		coyoteCounter -= 1
-		velocity.y += gravity * delta
+		if dashing == false:
+			velocity.y += gravity * delta
+		elif dashing == true:
+			velocity.y = 0
 		
 	# Coyote counter
 	if is_on_floor():
@@ -93,7 +99,18 @@ func _physics_process(delta):
 		
 	if dashing == false:
 		velocity.x = clamp(velocity.x, -maxSpeed, maxSpeed)
+		trail.visible = false
+		trail.clear_points()
 	if dashing == true:
+		trail.visible = true
 		velocity.x = clamp(velocity.x, -maxSpeedWhileDashing, maxSpeedWhileDashing)
 
 	move_and_slide()
+	
+func add_ghost():
+	var ghost = ghost_node.instantiate()
+	ghost.set_property(position, $AnimatedSprite2D.scale)
+	get_tree().current_scene.add_child(ghost)
+
+func _on_ghost_time_timeout():
+	add_ghost()
