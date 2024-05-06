@@ -66,18 +66,18 @@ func _physics_process(delta):
 	
 	# Flip sprite
 	if direction > 0:
-		animated_sprite.flip_h = false
-	elif direction < 0:
 		animated_sprite.flip_h = true
+	elif direction < 0:
+		animated_sprite.flip_h = false
 		
 	# Play anims
 	if is_on_floor():
 		if direction == 0:
-			animated_sprite.play("idle")
+			animated_sprite.play("newIdle")
 		else:
-			animated_sprite.play("run")
+			animated_sprite.play("newRun")
 	else:
-		animated_sprite.play("jump")
+		animated_sprite.play("newJump")
 	
 	# Dash
 	if Input.is_action_just_pressed("dash") and dashTimer == 0:
