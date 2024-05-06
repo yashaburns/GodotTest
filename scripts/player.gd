@@ -89,9 +89,9 @@ func _physics_process(delta):
 		dashing = false
 	
 	# Movement
-	if direction == 1:
+	if direction > 0.1:
 		velocity.x += acceleration
-	elif direction == -1:
+	elif direction < -0.1:
 		velocity.x -= acceleration 
 	else:
 	#	velocity.x = move_toward(velocity.x, 0, SPEED)
