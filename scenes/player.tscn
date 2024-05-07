@@ -1,8 +1,7 @@
-[gd_scene load_steps=40 format=3 uid="uid://cpqm2jhql721d"]
+[gd_scene load_steps=39 format=3 uid="uid://cpqm2jhql721d"]
 
 [ext_resource type="Texture2D" uid="uid://cll61bgif0txm" path="res://assets/sprites/knight.png" id="1_5lrjr"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_w37ce"]
-[ext_resource type="PackedScene" uid="uid://cjq7wx733b2nm" path="res://scenes/ghost.tscn" id="2_bx68n"]
 [ext_resource type="Texture2D" uid="uid://dvinspn50xgsc" path="res://assets/sprites/newIdle.png" id="4_5gcmk"]
 [ext_resource type="Texture2D" uid="uid://c7axi0ovf6lpf" path="res://assets/sprites/newJump.png" id="5_2p628"]
 [ext_resource type="Texture2D" uid="uid://b3sengwxufgsv" path="res://assets/sprites/newRun.png" id="6_1v0es"]
@@ -264,7 +263,6 @@ radius = 5.0
 z_index = 5
 collision_layer = 2
 script = ExtResource("1_w37ce")
-ghost_node = ExtResource("2_bx68n")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -10)
